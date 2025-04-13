@@ -1,0 +1,5 @@
+merge sort
+bublle sort
+quick sort
+atv que ela mandou
+classes assintoticas 
