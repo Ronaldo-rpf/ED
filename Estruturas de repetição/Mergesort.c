@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void mergesort(int*, int, int);
+void merge(int*, int, int, int);
+
 int main (){
     int *vet = (int*) malloc (10 * sizeof(int));
 
