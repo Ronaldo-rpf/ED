@@ -96,10 +96,28 @@ int pesquisaInterativa (Lista *lista, int elemento){
     return -1;
 }
 
-//int pesquisaBinaria (Lista *lista, int elemento){
-    
+int pesquisaBinaria (Lista *lista, int elemento){
+    int inicio = 0;
+    int fim = lista->tamanho - 1;
+    int meio = (inicio + fim) / 2;
 
-//}
+    while (inicio <= fim){
+        if (lista->elementos[meio] == elemento){
+            printf("Elemento encontrado no indice %d\n\n", meio);
+            return meio;
+        }
+        else if (lista->elementos[meio] > elemento){
+            fim = meio - 1;
+            meio = (inicio + fim) / 2;
+        }
+        else{
+            inicio = meio + 1;
+            meio = (inicio + fim) / 2;
+        }
+    }
+    printf("Elemento nao encontrado na lista.\n\n");
+    return -1;
+}
 
 void merge(int *vet, int inicio, int meio, int fim){
     int i = inicio, j = meio+1, k = 0;
@@ -171,6 +189,58 @@ int main() {
 
     mergesort(&minhaLista);
     imprimiLista(&minhaLista);
+
+    int aux = pesquisaBinaria(&minhaLista, 8);
+    printf("%d", aux);
+
+    int elemento;
+
+    Lista minhaLista2;
+    inicializaLista(&minhaLista2);
+
+    printf("1 - Inserir item na lista\n2 - Remover item da lista\n3 - Exibir lista\n4 - Pesquisar item na lista (ordene primeiro)\n5 - Ordenar crescentemente a lista\n6 - Sair\n\n");
+    printf("Digite: ");
+    scanf("%d", &aux);
+
+    while(aux != 6){
+        switch (aux){
+            case 1:
+                printf("Qual item deseja inserir?\n");
+                scanf("%d", &elemento);
+                aux = adicionaElemento(&minhaLista2, elemento);
+                break;
+            case 2:
+                printf("Qual item que deseja remover?\n");
+                imprimiLista(&minhaLista2);
+                scanf("%d", &elemento);
+                aux = pesquisaInterativa(&minhaLista2, elemento);
+                if (aux==-1){
+                    break;
+                }
+                removeElemento(&minhaLista2, aux);
+                break;
+            case 3:
+                imprimiLista(&minhaLista2);
+                break;
+            case 4:
+                printf("Qual item deseja pesquisar?\n");
+                imprimiLista(&minhaLista2);
+                scanf("%d", &elemento);
+                aux = pesquisaBinaria(&minhaLista2, elemento);
+                break;
+            case 5:
+                mergesort(&minhaLista2);
+                imprimiLista(&minhaLista2);
+                break;
+            default:
+                printf("Valor invalido.\n\n");
+                break;
+        }
+        printf("1 - Inserir item na lista\n2 - Remover item da lista\n3 - Exibir lista\n4 - Pesquisar item na lista (ordene primeiro)\n5 - Ordenar crescentemente a lista\n6 - Sair\n\n");
+        printf("Digite: ");
+        scanf("%d", &aux);
+    }
+    printf("Fim do programa.\n");
 
     return 0;
 }
