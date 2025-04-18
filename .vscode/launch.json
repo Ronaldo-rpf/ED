@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Exercicio-2",
+      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Exercicio-2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
