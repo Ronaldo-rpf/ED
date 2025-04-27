@@ -82,22 +82,8 @@ void lstEncadeada(){
 }
 
 void removerLstE(tpNo **lstAl){
-    unsigned int mat;
-
-    if(*lstAl == NULL){
-        printf("\n A lista nao tem nenhum aluno");
-        return;
-    }
-
-    printf("\n Digite a matricula do aluno: ");
-    scanf("%d",&mat);
-    getchar();
-
-    tpNo *al = removeItemLstEAux(lstAl, mat);
-    
-    if ( al != NULL || *lstAl == NULL){
-        printf("\n aluno Removido");
-    } else {
-        printf("\n ALUNO NAO CADASTRADO!!!");
-    }
+    unsigned int id;
+    printf("\nMatricula do aluno: ");
+    scanf("%d", &id);
+    *lstAl = removerItem(*lstAl, id);
 }

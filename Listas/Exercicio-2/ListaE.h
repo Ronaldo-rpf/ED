@@ -65,8 +65,6 @@ booleano isEmptyLstE(tpNo *lst);
  */
 tpItem *searchItemLstE(tpNo *lst, unsigned int id);
 
-tpNo* removeItemLstEAux(tpNo **noAtual, unsigned int id);
-
-tpNo * removeItemLstE(tpNo **noAnterior, tpNo **noAtual, unsigned int id);
+tpNo* removerItem (tpNo* lst, unsigned int id);
 
 #endif // LISTAE_H_INCLUDED

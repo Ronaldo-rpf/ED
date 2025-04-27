@@ -97,41 +97,28 @@ tpItem* searchItemLstE(tpNo *lst, unsigned int id){
     return NULL;
 }
 
-//-----------------------------------------------------------------------------
-/**
- * Função auxiliar para remover um nó da lista.
- * @param noAtual O ponteiro que aponta pro início da lista;
- * @param id ID do aluno que deseja remover da lista;
- * @return Ponteiro do tipo tpNo, para tratamento de erros na função principal.
- */
-tpNo* removeItemLstEAux(tpNo **noAtual, unsigned int id){
-    return removeItemLstE(NULL, noAtual, id);
-}
+tpNo* removerItem (tpNo* lst, unsigned int id){
+    tpNo* anterior = NULL;
+    tpNo* atual = lst;
 
-//-----------------------------------------------------------------------------
-/**
- * Encontra e remove um nó em uma lista encadeada.
- * @param noAnterior Nó imediatamente anterior ao analisado no momento;
- * @param noAtual Nó analisado nessa chamada de função atual; 
- * @param id ID do aluno que deseja remover da lista;
- * @return Ponteiro do tipo tpNo, para tratamento de erros na função principal.
- */
-tpNo * removeItemLstE(tpNo **noAnterior, tpNo **noAtual, unsigned int id){
-    if(*noAtual == NULL){
-        printf("b");
-        return NULL;
-    }
-    
-    else if((*noAtual)->item.id == id){
-        if(noAnterior == NULL){
-            *noAtual = (*noAtual)->prox;
-            return *noAtual;
+    while (atual != NULL){
+        if (atual->item.id == id){
+            if (anterior == NULL){
+                lst = atual->prox;
+            }
+            else{
+                anterior->prox = atual->prox;
+            }
+            free(atual);
+            printf("Aluno removido.\n");
+            return lst;
         }
         else{
-            return (*noAnterior)->prox = (*noAtual)->prox;
+            anterior = atual;
+            atual = atual->prox;
         }
     }
-    else{
-        return removeItemLstE(noAtual, &((*noAtual)->prox), id);
-    }
+    printf("Aluno nao cadastrado.\n");
+    return lst;
 }
+
