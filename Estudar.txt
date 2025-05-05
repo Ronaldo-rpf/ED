@@ -1,4 +1,0 @@
-
-quick sort
-atv que ela mandou
-classes assintoticas 
