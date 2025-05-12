@@ -216,3 +216,46 @@ booleano ordenadaOuNao (tpLDE lst){
     return true;
 }
 
+tpLDE copiaL1emL2 (tpLDE lde1){
+    tpLDE L2 = initLstDE();
+    L2.quantItens = lde1.quantItens;
+    L2.ptrPrim = lde1.ptrPrim;
+    L2.ptrUlt = lde1.ptrUlt;
+    return L2;
+}
+
+void copiaL1emL2existente (tpLDE lde1, tpLDE *lde2){
+    int veri, quant;
+    quant = lde2->quantItens;
+    tpNo *aux = lde2->ptrPrim;
+    while(aux != NULL){    
+        for (int i = 0; i < quant; i++){
+            veri = deleteLstDE(lde2, aux->item.id);
+            if(veri){
+                printf("Erro ao deletar aluno da lista L2.\n");
+                return;
+            }
+            aux = aux->ptrProx;
+        }
+    }
+    printf("Todos os aluno da lista L2 foram deletados.\n");
+    aux = lde1.ptrPrim;
+    while(aux->ptrProx != NULL){    
+        if (aux->item.id == aux->ptrProx->item.id){
+            veri = deleteLstDE(&lde1, aux->item.id);
+            if(veri){
+                printf("Erro ao deletar aluno da lista L1.\n");
+                return;
+            }
+        }
+        aux = aux->ptrProx;
+    }
+    printf("Todos os aluno repetidos da lista L1 foram deletados.\n");
+
+    lde2->ptrPrim = lde1.ptrPrim;
+    lde2->ptrUlt = lde1.ptrUlt;
+    lde2->quantItens = lde1.quantItens;
+    printf("A lista L1 foi copiada para a lista L2.\n");
+    return;
+}
+

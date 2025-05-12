@@ -92,5 +92,9 @@ int quantosIds (tpLDE lst, unsigned int id);
 
 booleano ordenadaOuNao (tpLDE lst);
 
+tpLDE copiaL1emL2 (tpLDE lde1);
+
+void copiaL1emL2existente (tpLDE lde1, tpLDE *lde2);
+
 #endif // LISTAE_H_INCLUDED
 
