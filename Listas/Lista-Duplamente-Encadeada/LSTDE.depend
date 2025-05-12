@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1745930605 source:c:\users\mmdor\documents\ed\codigos\lstde\item.c
+	"Item.h"
+
+1745930636 c:\users\mmdor\documents\ed\codigos\lstde\item.h
+	<string.h>
+	<stdio.h>
+
+1746476785 source:c:\users\mmdor\documents\ed\codigos\lstde\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ListaDE.h"
+	<conio.h>
+
+1746477040 source:c:\users\mmdor\documents\ed\codigos\lstde\listade.c
+	"ListaDE.h"
+
+1746496882 c:\users\mmdor\documents\ed\codigos\lstde\listade.h
+	"Item.h"
+	<stdlib.h>
+

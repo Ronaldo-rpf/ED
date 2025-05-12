@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Lista-Duplamente-Encadeada",
-      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Lista-Duplamente-Encadeada/build/Debug/outDebug",
+      "cwd": "c:/Users/Ronaldo/Downloads/LSTDE/LSTDE",
+      "program": "c:/Users/Ronaldo/Downloads/LSTDE/LSTDE/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
