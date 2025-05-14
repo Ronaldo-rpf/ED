@@ -26,3 +26,7 @@ tpPilha initPilha();
 
 int inserirAluno (tpPilha *pilha, tpItem aluno);
 
+tpItem searchItemPilha (tpPilha pilha, unsigned int id);
+
+int deletePilha (tpPilha *pilha, unsigned int id);
+

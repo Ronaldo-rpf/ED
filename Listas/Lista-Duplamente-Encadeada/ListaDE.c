@@ -217,10 +217,17 @@ booleano ordenadaOuNao (tpLDE lst){
 }
 
 tpLDE copiaL1emL2 (tpLDE lde1){
+    int veri;
     tpLDE L2 = initLstDE();
-    L2.quantItens = lde1.quantItens;
-    L2.ptrPrim = lde1.ptrPrim;
-    L2.ptrUlt = lde1.ptrUlt;
+    tpNo *aux = lde1.ptrPrim;
+    while (aux != NULL){
+        veri = insertLstDE_SR(&L2, aux->item);
+        if (veri){
+            printf("Erro ao inserir item de L1 em L2.\n");    
+            return L2;
+        }
+        aux = aux->ptrProx;
+    }
     return L2;
 }
 
@@ -252,9 +259,16 @@ void copiaL1emL2existente (tpLDE lde1, tpLDE *lde2){
     }
     printf("Todos os aluno repetidos da lista L1 foram deletados.\n");
 
-    lde2->ptrPrim = lde1.ptrPrim;
-    lde2->ptrUlt = lde1.ptrUlt;
-    lde2->quantItens = lde1.quantItens;
+    aux = lde1.ptrPrim;
+    while (aux != NULL){
+        veri = insertLstDE_SR(lde2, aux->item);
+        if(veri){
+            printf("Erro ao inserir item de L1 em L2.\n");    
+            return;
+        }
+        aux = aux->ptrProx;
+    }
+
     printf("A lista L1 foi copiada para a lista L2.\n");
     return;
 }

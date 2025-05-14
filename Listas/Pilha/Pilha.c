@@ -36,4 +36,21 @@ int inserirAluno (tpPilha *pilha, tpItem aluno){
     return 1;
 }
 
-//search e delete
+tpItem searchItemPilha (tpPilha pilha, unsigned int id){
+    tpItem item;
+    tpNo *aux = pilha.ptrPrim;
+    while (aux != NULL){
+        if (aux->aluno.id == id){
+            item.id = id;
+            item.nome = aux->aluno.nome;
+            return item;
+        }
+        aux = aux->ptrProx;
+    }
+    item.id = -1;
+    return item;
+}
+
+int deletePilha (tpPilha *pilha, unsigned int id){
+
+}

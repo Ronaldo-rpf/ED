@@ -14,9 +14,9 @@ void ordenadoOuNao (tpLDE lde);
 
 int main()
 {   tpLDE lde = initLstDE();
-    char escolha;
-    escolha = menu();
-
+    //char escolha;
+    //escolha = menu();
+/*
     while (escolha != '5'){
         switch (escolha){
             case '1':
@@ -43,6 +43,20 @@ int main()
         }
         escolha = menu();
     }
+*/
+    inserirAluno(&lde);
+    inserirAluno(&lde);
+    inserirAluno(&lde);
+    printLstDE(lde);
+
+    tpLDE L2 = initLstDE();
+    inserirAluno(&L2);
+    inserirAluno(&L2);
+    inserirAluno(&L2);
+    printLstDE(L2);
+
+    copiaL1emL2existente(lde, &L2);
+    printLstDE(L2);
 
     printf("\n FIM!\n");
     return 0;

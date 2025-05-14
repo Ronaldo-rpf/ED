@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Lista-Duplamente-Encadeada",
-      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Lista-Duplamente-Encadeada/build/Debug/outDebug",
+      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Pilha",
+      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Pilha/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
