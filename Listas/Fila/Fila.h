@@ -16,18 +16,18 @@ typedef struct tpNo{
 typedef struct{
     tpNo *ptrPrim, *ptrUlt;
     int quantidadeItens;
-} tpPilha;
+} tpFila;
 
 //-------------------------------------------------------------------------------------
 
-void printarPilha (tpPilha pilha);
+void printarFila (tpFila fila);
 
-tpPilha initPilha();
+tpFila initFila();
 
-int inserirAluno (tpPilha *pilha, tpItem aluno);
+int enqueue (tpFila *fila, tpItem aluno);
 
-tpItem searchItemPilha (tpPilha pilha, unsigned int id);
+tpItem searchItemFila (tpFila fila, unsigned int id);
 
-int deletePilha (tpPilha *pilha, unsigned int id);
+int deleteFila (tpFila *fila, unsigned int id);
 
-void pop (tpPilha *pilha);
+void dequeue (tpFila *fila);

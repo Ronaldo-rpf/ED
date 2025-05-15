@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-#include "Pilha.h"
+#include "Fila.h"
 
 char menu();
-void inserir(tpPilha *pilha);
-void deletarQualquer(tpPilha *pilha);
-void pesquisar(tpPilha pilha);
+void inserir(tpFila *fila);
+void deletarQualquer(tpFila *fila);
+void pesquisar(tpFila fila);
 
 int main(){
-    tpPilha pilha = initPilha();
+    tpFila fila = initFila();
     
     char escolha;
     escolha = menu();
@@ -18,19 +18,19 @@ int main(){
     while(escolha != '6'){
         switch (escolha){
             case '1':
-                inserir(&pilha);
+                inserir(&fila);
                 break;
             case'2':
-                pop(&pilha);
+                dequeue(&fila);
                 break;
             case'3':
-                deletarQualquer(&pilha);
+                deletarQualquer(&fila);
                 break;
             case'4':
-                pesquisar(pilha);
+                pesquisar(fila);
                 break;
             case '5':
-                printarPilha(pilha);
+                printarFila(fila);
                 break;
             default:
                 printf("Opcao invalida.\n");
@@ -45,8 +45,8 @@ int main(){
 
 char menu(){
     char escolha = 'a';
-    printf("-----------Programa Pilha-----------\n");
-    printf("1 - Inserir\n2 - Deletar aluno\n3 - Deletar qualquer aluno da pilha\n4 - Pesquisar aluno\n5 - Mostrar pilha\n6 - Sair\n");
+    printf("-----------Programa Fila-----------\n");
+    printf("1 - Inserir\n2 - Deletar aluno\n3 - Deletar qualquer aluno da Fila\n4 - Pesquisar aluno\n5 - Mostrar fila\n6 - Sair\n");
     while (escolha != '1' && escolha != '2' && escolha != '3' && escolha != '4' && escolha != '5' && escolha != '6'){
         printf("Digite a seguir: ");
         escolha = getch();
@@ -56,7 +56,7 @@ char menu(){
 
 }
 
-void inserir(tpPilha *pilha){
+void inserir(tpFila *fila){
     char nome[50];
     unsigned int mat;
     tpItem aluno;
@@ -68,7 +68,7 @@ void inserir(tpPilha *pilha){
     
     aluno.id = mat;
     strcpy(aluno.nome, nome);
-    int veri = inserirAluno(pilha, aluno);
+    int veri = enqueue(fila, aluno);
     if (veri){
         printf("Erro ao inserir aluno.\n");
         return;
@@ -77,28 +77,28 @@ void inserir(tpPilha *pilha){
     return;
 }
 
-void deletarQualquer(tpPilha *pilha){
+void deletarQualquer(tpFila *fila){
     unsigned int mat;
     printf("Matricula do aluno: ");
     scanf("%d", &mat);
     getchar();
 
-    int veri = deletePilha(pilha, mat);
+    int veri = deleteFila(fila, mat);
     if (veri){
-        printf("Aluno nao foi encontrado. Pilha deletada.\n");
+        printf("Aluno nao foi encontrado. Fila deletada.\n");
         return;
     }
     printf("Aluno deletado.\n");
     return;
 }
 
-void pesquisar(tpPilha pilha){
+void pesquisar(tpFila fila){
     unsigned int mat;
     printf("Matricula do aluno: ");
     scanf("%d", &mat);
     getchar();
 
-    tpItem aluno = searchItemPilha(pilha, mat);
+    tpItem aluno = searchItemFila(fila, mat);
     if (aluno.id == 0){
         printf("Aluno nao encontrado.\n");
         return;
