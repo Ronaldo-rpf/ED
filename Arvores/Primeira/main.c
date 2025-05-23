@@ -5,6 +5,7 @@
 int main (){
     tpNo* T;
     T = initArvore();
+    
 
 
     return 0;
