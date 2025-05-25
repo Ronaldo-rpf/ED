@@ -5,10 +5,16 @@
 
 typedef struct{
     int num;
-    tpNo *prtEsq, *prtDir;
+    struct tpNo *prtEsq, *prtDir;
 }tpNo;
 
 //----------------------------------------------------------------
 
 tpNo* initArvore();
+
+int insertArvoreR(tpNo **arvore, int num);
+
+int searchArvoreR(tpNo *arvore, int valor);
+
+int alturaArvore(tpNo *arvore);
 

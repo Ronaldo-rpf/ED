@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Fila",
-      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Listas/Fila/build/Debug/outDebug",
+      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/Primeira",
+      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/Primeira/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
