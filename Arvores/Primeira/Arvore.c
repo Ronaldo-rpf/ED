@@ -72,3 +72,85 @@ int searchArvoreR(tpNo *arvore, int valor){
         return searchArvoreR(arvore, valor);
     }
 }
+
+int deleteArvore(tpNo **arvore, int num){
+    tpNo **aux = arvore;
+    (*aux) = deletarAux(aux, num);
+
+    if ((*aux) == NULL){
+        printf("Valor nao encontrado.\n");
+        return 1;
+    }
+    (*arvore) = (*aux);
+    printf("Numero deletado.\n");
+    return 0;
+}
+
+tpNo* deletarAux(tpNo **arvore, int num){
+    if ((*arvore) == NULL){
+        return NULL;
+    }
+    else {
+        if ((*arvore)->num == num){
+            printf("O numero foi encontrado.\n");
+            if ((*arvore)->prtDir == NULL && (*arvore)->prtEsq == NULL){
+                printf("Numero deletado: %d\n", (*arvore)->num);
+                free(*arvore);
+                return NULL;
+            }
+            else{
+                if ((*arvore)->prtDir != NULL && (*arvore)->prtEsq != NULL){
+                    tpNo* aux = (*arvore)->prtEsq;
+                    while (aux->prtDir != NULL){
+                        aux = aux->prtDir;
+                    }
+                    printf("Valores trocados: %d e %d\n", (*arvore)->num, aux->num);
+                    (*arvore)->num = aux->num;
+                    aux->num = num;
+                    (*arvore)->prtEsq = deletarAux(&((*arvore)->prtEsq), num);
+                    return (*arvore);
+                }
+                else{
+                    tpNo* aux;
+                    if ((*arvore)->prtDir != NULL){
+                        aux = (*arvore)->prtDir;
+                        printf("Numero deletado: %d\n", (*arvore)->num);
+                        free(*arvore);
+                    }
+                    else{
+                        aux = (*arvore)->prtEsq;
+                        printf("Numero deletado: %d\n", (*arvore)->num);
+                        free(*arvore);
+                    }
+                    return aux;
+                }
+            }
+        }
+        else{
+            if ((*arvore)->num <= num){
+                (*arvore)->prtDir = deletarAux(&((*arvore)->prtDir), num);
+            }   
+            else{
+                (*arvore)->prtEsq = deletarAux(&((*arvore)->prtEsq), num);
+            }
+            return (*arvore);
+        }
+    }
+}
+
+void imprimirNaoOrdenada(tpNo *arvore){
+    if (arvore != NULL){
+        printf("%d ", arvore->num);
+        imprimirNaoOrdenada(arvore->prtEsq);
+        imprimirNaoOrdenada(arvore->prtDir);
+    }
+}
+
+void imprimirOrdenada(tpNo *arvore){
+    if (arvore != NULL){
+        imprimirOrdenada(arvore->prtEsq);
+        printf("%d ", arvore->num);
+        imprimirOrdenada(arvore->prtDir);
+    }
+}
+

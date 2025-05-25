@@ -5,7 +5,7 @@
 
 char escolha();
 void inserir (tpNo **arvore);
-//void deletar (tpNo **arvore);
+void deletar (tpNo **arvore);
 void pesquisar (tpNo *arvore);
 void altura (tpNo *arvore);
 
@@ -20,7 +20,7 @@ int main (){
                 inserir(&T);
                 break;
             case '2':
-                printf("deletar.\n");
+                deletar(&T);
                 break;
             case '3':
                 pesquisar(T);
@@ -28,11 +28,19 @@ int main (){
             case '4':
                 altura(T);
                 break;
+            case '5':
+                printf("Ordenada:\n");
+                imprimirOrdenada(T);
+                printf("\n\n");
+                printf("Nao ordenada:\n");
+                imprimirNaoOrdenada(T);
+                printf("\n\n");
+                break;
             default:
                 break;
         }
         letra = escolha();
-    } while(letra != '5');
+    } while(letra != '6');
 
     printf("FIM.\n");
     return 0;
@@ -41,8 +49,8 @@ int main (){
 char escolha(){
     char escolha = 'a';
     printf("--------------------------------Programa Arvore--------------------------------\n");
-    printf("1 - Inserir no.\n2 - Deletar no.\n3 - Pesquisar no.\n4 - Altura da arvore.\n5 - Sair.\n");
-    while (escolha != '1' && escolha != '2' && escolha != '3' && escolha != '4' && escolha != '5'){
+    printf("1 - Inserir no.\n2 - Deletar no.\n3 - Pesquisar no.\n4 - Altura da arvore.\n5 - Imprimir Arvore.\n6 - Sair.\n");
+    while (escolha != '1' && escolha != '2' && escolha != '3' && escolha != '4' && escolha != '5' && escolha != '6'){
         printf("Digite: ");
         escolha = getch();
         printf("Escolha feita: %c\n", escolha);
@@ -94,4 +102,18 @@ void altura (tpNo *arvore){
         printf("A arvore tem altura %d.\n", aux);
         return;
     }
+}
+
+void deletar (tpNo **arvore){
+    int num;
+    printf("Numero que deseja deletar: ");
+    scanf("%d", &num);
+    getchar();
+    int aux = deleteArvore(arvore, num);
+    if (aux == 0){
+        printf("Numero deletado com sucesso.\n");
+        return;
+    }
+    printf("Falha ao deletar numero.\n");
+    return;
 }
