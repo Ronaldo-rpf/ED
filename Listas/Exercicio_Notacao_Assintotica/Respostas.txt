@@ -1,0 +1,116 @@
+1º - 
+Para os valores de n maior que 8.
+
+2º -
+a - T(n) = 2n + 6, no melhor caso (vetor ordenado crescentemente).
+    T(n) = 2n + 8, no pior caso (vetor ordenado de forma decrescente).
+
+b - Essa função T pertence à Classe Assintótica de "n", ou seja, seu O grande pertenece a classe "n", e seu ômega pertence a esta mesma classe "n".
+
+3º -
+1 - F, Big-O (n²), Omega(n²), Theta(n²). Pode sim ser verdade, mas não seria justo.
+2 - V, Big-O (2^n), Omega(2^n), Theta(2^n).
+3 - F, Big-O (log_2(n)), Omega(log_2(n)), Theta(log_2(n)). Pode sim ser verdade, mas não seria justo.
+4 - F, Big-O (n!), Omega(n!), Theta(n!).
+5 - F, Big-O (sqrt(n)), Omega(sqrt(n)), Theta(sqrt(n)). Pode sim ser verdade, mas não seria justo.
+6 - V, Big-O (n²), Omega(n²), Theta(n²).
+7 - F, Big-O (nlog_2(n)), Omega(nlog_2(n)), Theta(nlog_2(n)).
+8 - F, Big-O (2^2n), Omega(2^2n), Theta(2^2n).
+9 - F, Big-O (n^1001), Omega(n^1001), Theta(n^1001). Pode sim ser verdade, mas não seria justo.
+10 - V, Big-O (1), Omega(1), Theta(1).
+
+4º -
+6. 1000         ∈ O(1), pertence à classe assintótica das funções constantes.
+1. log(n²)      ∈ O(log n), pertence à classe assintótica das funções logarítmicas.
+2. n^0.5        ∈ O(sqrt(n)), pertence à classe assintótica das funções de raiz quadrada.
+8. n            ∈ O(n), pertence à classe assintótica das funções lineares.
+4. nlogn        ∈ O(nlog n), pertence à classe assintótica das funções nlogn.
+5. n²/100       ∈ O(n²), pertence à classe assintótica das funções quadráticas.
+3. 2^n          ∈ O(2^n), pertence à classe assintótica das funções exponenciais.
+9. 2^2n         ∈ O(2^2n), pertence à classe assintótica das funções exponenciais multiplicadas por outras funções exponenciais.
+7. n!           ∈ O(n!), pertence à classe assintótica das funções fatoriais.
+Quando analisamos o gráfico de cada função assintótica, podemos ver que esta sequência está ordenada de forma crescente.
+
+5º -
+1. 
+O(n³)
+Prova:
+10n³ + 5n² - 2n + 7 <= 10n³ + 5n² - 2n + 7, n>0
+10n³ + 5n² - 2n + 7 <= 10n³ + 5n³ - 2n³ + 7n³, n>0
+10n³ + 5n² - 2n + 7 <= 20n³, n>0
+Portanto, essa função pertence à classe assintótica de n³.
+
+2. 
+(n² + 1)(n - 3) =
+n³ - 3n² + n - 3
+O(n³)
+Prova:
+n³ - 3n² + n - 3 <= n³ - 3n² + n - 3, n>0
+n³ - 3n² + n - 3 <= n³ - 3n³ + n³ - 3n³, n>0
+n³ - 3n² + n - 3 <= -4n³, n>0
+Portanto, desconsiderando a constante multiplicativa, essa função pertence à classe assintótica de n³.
+
+3.
+O(2^n)
+Prova:
+4 * 2^n + n^5 <= 4 * 2^n + n^5, n>0
+4 * 2^n + n^5 <= 4 * 2^n + 2^n, n>0
+4 * 2^n + n^5 <= 5 * 2^n, n>0
+Portanto, essa função pertence à classe assintótica de 2^n.
+
+4. 
+O(sqrt(n))
+Prova:
+log_2(n³) + sqrt(n) <= log_2(n³) + sqrt(n), n>0
+log_2(n³) + sqrt(n) <= 3 * log_2(n) + sqrt(n), n>0
+log_2(n³) + sqrt(n) <= 3 * sqrt(n) + sqrt(n), n>0
+log_2(n³) + sqrt(n) <= 4 * sqrt(n), n>0
+Portanto, essa função pertence à classe assintótica de sqrt(n).
+
+5.
+O(n)
+Prova:
+n^4 + n² / n³ + 1 <= n^4 + n² / n³ + 1, n>0
+n^4 + n² / n³ + 1 <= n^4 + n^4 / n³ + n³, n>0
+n^4 + n² / n³ + 1 <= 2n^4 / 2n³, n>0
+n^4 + n² / n³ + 1 <= n^4 / n³, n>0
+n^4 + n² / n³ + 1 <= n, n>0
+Portanto, essa função pertence à classe assintótica de n.
+
+4º Análise de trechos de código:
+Considerando comparações e atribuições, e analisando o comportamento do código com valores pequenos e genéricos de entrada, cheguei nesses resultados:
+a - O(n)
+b - O(n²)
+c - O(logn)
+d - O(2^n)
+e - O(n²)
+
+5º Comparação de Algoritmos:
+1 - O algoritmo B. Pois logaritmo quase sempre gera valores menores do que n², então mesmo multiplicando com n, ele ainda terá um tempo de execução menor do que o algortmo A.
+
+2 - O algoritmo B. Pois sua classe assintótica está abaixo da classe assintótica do algoritmo A, ou seja, sua execução será mais rápida.
+
+3 - Não. Pois para qualquer valor de n maior ou igual a 0, o algoritmo A sempre será maior ou igual ao algoritmo B.
+
+6º Demonstrações Formais:
+1 - 4n + 10 ∈ O(n)
+Prova:
+4n + 10 <= 4n + 10, n>0
+4n + 10 <= 4n + 10n, n>0
+4n + 10 <= 14n, n>0
+Portanto, essa função pertence a O(n).
+
+2 - n² + 3n + 2 ∈ O(n²)
+Prova:
+n² + 3n + 2 <= n² + 3n + 2, n>0
+n² + 3n + 2 <= n² + 3n² + 2n², n>0
+n² + 3n + 2 <= 6n², n>0
+Portanto, essa função pertence a O(n²).
+
+7º Desafio:
+O(n²).
+Prova: 
+an² + b*nlogn + cn + d <= an² + b*nlogn + cn + d, n>0
+an² + b*nlogn + cn + d <= an² + bn² + cn² + dn², n>0
+an² + b*nlogn + cn + d <= (a + b + c + d)n², n>0
+Portanto, esse algoritmo pertence à notação O(n²).

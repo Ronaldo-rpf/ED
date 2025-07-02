@@ -73,19 +73,6 @@ int searchArvoreR(tpNo *arvore, int valor){
     }
 }
 
-int deleteArvore(tpNo **arvore, int num){
-    tpNo **aux = arvore;
-    (*aux) = deletarAux(aux, num);
-
-    if ((*aux) == NULL){
-        printf("Valor nao encontrado.\n");
-        return 1;
-    }
-    (*arvore) = (*aux);
-    printf("Numero deletado.\n");
-    return 0;
-}
-
 tpNo* deletarAux(tpNo **arvore, int num){
     if ((*arvore) == NULL){
         return NULL;
@@ -129,7 +116,7 @@ tpNo* deletarAux(tpNo **arvore, int num){
         else{
             if ((*arvore)->num <= num){
                 (*arvore)->prtDir = deletarAux(&((*arvore)->prtDir), num);
-            }   
+            }
             else{
                 (*arvore)->prtEsq = deletarAux(&((*arvore)->prtEsq), num);
             }
