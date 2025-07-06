@@ -125,7 +125,7 @@ tpNo* deletarAux(tpNo **arvore, int num){
     }
 }
 
-void imprimirNaoOrdenada(tpNo *arvore){
+void imprimirNaoOrdenada(tpNo *arvore){                           //pre-order
     if (arvore != NULL){
         printf("%d ", arvore->num);
         imprimirNaoOrdenada(arvore->prtEsq);
@@ -133,7 +133,7 @@ void imprimirNaoOrdenada(tpNo *arvore){
     }
 }
 
-void imprimirOrdenada(tpNo *arvore){
+void imprimirOrdenada(tpNo *arvore){                              //in-order
     if (arvore != NULL){
         imprimirOrdenada(arvore->prtEsq);
         printf("%d ", arvore->num);
