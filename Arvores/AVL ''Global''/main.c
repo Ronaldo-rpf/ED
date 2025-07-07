@@ -11,7 +11,6 @@ void altura (tpNo *arvore);
 
 int main (){
     tpNo* T;
-    tpNo** aux = &T;
     T = initArvore();
     
     char letra = escolha();
@@ -19,7 +18,7 @@ int main (){
         switch (letra){
             case '1':
                 inserir(&T);
-                fatorBalanceamento(&T);
+                balanceamento(&T);
                 break;
             case '2':
                 deletar(&T);
@@ -43,14 +42,6 @@ int main (){
         }
         letra = escolha();
     } while(letra != '6');
-
-    T->fatorBalanceamento = alturaArvore(T->prtDir) - alturaArvore(T->prtEsq);
-    int aux = T->fatorBalanceamento;
-    printf("%d", aux);
-    T->prtDir->fatorBalanceamento = alturaArvore(T->prtDir->prtDir) - alturaArvore(T->prtDir->prtEsq);
-    aux = T->prtDir->fatorBalanceamento;
-    printf("%d", aux);
-    
 
     printf("FIM.\n");
     return 0;

@@ -28,26 +28,45 @@ int insertArvoreR(tpNo **arvore, int num){
 
 void balanceamento (tpNo **arvore){
     if ((*arvore) != NULL){
+        fatorBalanceamento(arvore);
         balanceamento (&(*arvore)->prtEsq);
         if ((*arvore)->fatorBalanceamento < -1){
             printf("Rotacionou 1 vez pra direita.\n");
-            
+            rotacaoSimplesDireita(arvore);
+            fatorBalanceamento(arvore);
         }
+        else if ((*arvore)->fatorBalanceamento > 1){
+            printf("Rotacionou 1 vez pra esquerda.\n");
+            rotacaoSimplesEsquerda(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ()
+        balanceamento(&(*arvore)->prtDir);
     }
 }
 
 void fatorBalanceamento (tpNo **arvore){
-    if ((*arvore) == NULL){
-        (*arvore)->fatorBalanceamento = -1;
-        return;
+    if ((*arvore) != NULL){        
+        fatorBalanceamento(&(*arvore)->prtEsq);
+        (*arvore)->fatorBalanceamento = alturaArvore((*arvore)->prtDir) - alturaArvore((*arvore)->prtEsq);
+        fatorBalanceamento(&(*arvore)->prtDir);
     }
-    fatorBalanceamento(&(*arvore)->prtEsq);
-    (*arvore)->fatorBalanceamento = alturaArvore((*arvore)->prtDir) - alturaArvore((*arvore)->prtEsq);
-    fatorBalanceamento(&(*arvore)->prtDir);
 }
 
 void rotacaoSimplesDireita (tpNo **arvore){
-    
+    tpNo *filho = (*arvore)->prtEsq;
+    tpNo *aux = filho->prtDir;
+    filho->prtDir = (*arvore);
+    (*arvore)->prtEsq = aux;
+    (*arvore) = filho;
+}
+
+void rotacaoSimplesEsquerda (tpNo **arvore){
+    tpNo *filho = (*arvore)->prtDir;
+    tpNo *aux = filho->prtEsq;
+    filho->prtEsq = (*arvore);
+    (*arvore)->prtDir = aux;
+    (*arvore) = filho;
 }
 
 int alturaArvore(tpNo *arvore){

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/AVL",
-      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/AVL/build/Debug/outDebug",
+      "cwd": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/AVL ''Global''",
+      "program": "c:/Users/Ronaldo/OneDrive/Documentos/ED/Arvores/AVL ''Global''/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

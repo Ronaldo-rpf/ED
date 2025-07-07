@@ -26,3 +26,9 @@ void imprimirNaoOrdenada(tpNo *arvore);
 void imprimirOrdenada(tpNo *arvore);
 
 void fatorBalanceamento (tpNo **arvore);
+
+void balanceamento (tpNo **arvore);
+
+void rotacaoSimplesDireita (tpNo **arvore);
+
+void rotacaoSimplesEsquerda (tpNo **arvore);
