@@ -12,14 +12,12 @@ int qualoMaior(dragao *vet, int tamanho);
 int main (){
     int cont = 0, controleDias = 0, total, maior, dias, multa, tamanho, indice = 0;
     double multaTotal = 0;
-    printf("Quantos dragaoes terao ao todo? \n");
     scanf("%d", &tamanho);
     total = tamanho;
     dragao *vet = (dragao*) calloc (tamanho, sizeof(dragao));
     if (vet == NULL){
         return 0;
     }
-    printf("Inicio dia %d.\n", (cont + 1));
     if(total != 0){
         scanf("%d %d", &dias, &multa);
         vet[indice].dias = dias;
@@ -29,22 +27,16 @@ int main (){
         indice++;
         total--;
     }
-    maior = qualoMaior(vet, tamanho);
-    printf("Comecou a treinar o indice %d.\n", maior);   
+    maior = qualoMaior(vet, tamanho); 
     vet[maior].dias--; 
-    printf("Fim do dia %d.\n", (cont+1));
-    
     cont++;
 
     while (controleDias > cont){
-        printf("Inicio dia %d.\n", (cont + 1));
 
         if(vet[maior].dias == 0){
-            printf("terminou de treinar o dragao de indice %d.\n", maior);
             vet[maior].media = 0;
             vet[maior].multa = 0;
             maior = qualoMaior(vet, tamanho);
-            printf("comeca hoje cedo ja a treinar o de indice %d\n", maior);
         }
         
         if(total != 0){
@@ -63,14 +55,11 @@ int main (){
             }
             multaTotal += vet[i].multa;
         }
-        printf("Multa acumulada ate esse dia %.2lf\n", multaTotal);
-        
-        printf("Fim do dia %d.\n", (cont+1));
         vet[maior].dias--;
         cont++;
     }
 
-    printf("Multa a pagar TOTAL = %.2lf\n", multaTotal);
+    printf("%lf", multaTotal);
     free(vet);
     return 0;
 }
