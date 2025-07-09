@@ -24,12 +24,20 @@ int main (){
     printf("\n");
 
     //INSERIR
+    int item;
+    printf("Iserir item: ");
+    scanf("%d", &item);
+    inserirItem(vet, tamanho-1, item);
+    tamanho++;
 
-    
-
+    for (int i = 0; i < tamanho; i++){
+        printf("%d ", vet[i]);
+    }
+    printf("\n");
 
 
     free(vet);
     printf("FIM\n\n");
     return 0;
 }
+

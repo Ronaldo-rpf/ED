@@ -7,12 +7,14 @@ typedef struct dragao{
     double media;
 }dragao;
 
-int qualoMaior(dragao *vet, int tamanho);
+void desceHeap(dragao *vet, int ultimoIndice, int indiceAserHipado);
+void constroiHeap (dragao *vet, int ultimoIndice);
+dragao removerPrioridade (dragao *vet, int ultimoIndice);
 
 int main (){
-    int cont = 0, controleDias = 0, total, maior, dias, multa, tamanho, indice = 0;
+    dragao maior;
+    int cont = 0, controleDias = 0, total, dias, multa, tamanho, indice = 0;
     double multaTotal = 0;
-    printf("Quantos dragaoes terao ao todo? \n");
     scanf("%d", &tamanho);
     total = tamanho;
     dragao *vet = (dragao*) calloc (tamanho, sizeof(dragao));
@@ -26,25 +28,20 @@ int main (){
         controleDias += dias;
         vet[indice].multa = multa;
         vet[indice].media = vet[indice].multa / vet[indice].dias;
-        indice++;
+        constroiHeap(vet, tamanho-1);
         total--;
     }
-    maior = qualoMaior(vet, tamanho);
-    printf("Comecou a treinar o indice %d.\n", maior);   
-    vet[maior].dias--; 
-    printf("Fim do dia %d.\n", (cont+1));
+    maior = removerPrioridade(vet, tamanho-1);
+    tamanho--;
+    maior.dias--; 
     
     cont++;
 
     while (controleDias > cont){
-        printf("Inicio dia %d.\n", (cont + 1));
 
-        if(vet[maior].dias == 0){
-            printf("terminou de treinar o dragao de indice %d.\n", maior);
-            vet[maior].media = 0;
-            vet[maior].multa = 0;
-            maior = qualoMaior(vet, tamanho);
-            printf("comeca hoje cedo ja a treinar o de indice %d\n", maior);
+        if(maior.dias == 0){
+            maior = removerPrioridade(vet, tamanho-1);
+            tamanho--;
         }
         
         if(total != 0){
@@ -53,20 +50,15 @@ int main (){
             controleDias += dias;
             vet[indice].multa = multa;
             vet[indice].media = vet[indice].multa / vet[indice].dias;
-            indice++;
+            constroiHeap(vet, tamanho-1);
             total--;
         }
         
         for (int i = 0; i < tamanho; i++){
-            if (i == maior){
-                continue;
-            }
             multaTotal += vet[i].multa;
         }
-        printf("Multa acumulada ate esse dia %.2lf\n", multaTotal);
         
-        printf("Fim do dia %d.\n", (cont+1));
-        vet[maior].dias--;
+        maior.dias--;
         cont++;
     }
 
@@ -75,12 +67,40 @@ int main (){
     return 0;
 }
 
-int qualoMaior(dragao *vet, int tamanho){
-    int maior = 0;
-    for (int i =0; i<tamanho; i++){
-        if (vet[i].media > vet[maior].media){
-            maior = i;
-        }
+void desceHeap(dragao *vet, int ultimoIndice, int indiceAserHipado){
+    dragao aux;
+    int maior;
+    int esquerda = 2*indiceAserHipado + 1;
+    int direita = 2*indiceAserHipado + 2;
+    if (esquerda <= ultimoIndice && vet[esquerda].media > vet[indiceAserHipado].media){
+        maior = esquerda;
     }
-    return maior;
+    else{
+        maior = indiceAserHipado;
+    }
+    if (direita <= ultimoIndice && vet[direita].media > vet[maior].media){
+        maior = direita;
+    }
+    if (maior != indiceAserHipado){
+        aux = vet[maior];
+        vet[maior] = vet[indiceAserHipado];
+        vet[indiceAserHipado] = aux;
+        desceHeap(vet, ultimoIndice, maior);
+    }
+}
+
+void constroiHeap (dragao *vet, int ultimoIndice){
+    for (int i = (ultimoIndice/2); i >= 0; i--){
+        desceHeap(vet, ultimoIndice, i);
+    }
+}
+
+dragao removerPrioridade (dragao *vet, int ultimoIndice){
+    dragao prioridade;
+    prioridade = vet[0];
+    vet[0] = vet[ultimoIndice];
+    dragao *temp = (dragao*) realloc (vet, ultimoIndice * sizeof(int));
+    vet = temp;
+    desceHeap(vet, ultimoIndice-1, 0);
+    return prioridade;
 }

@@ -18,7 +18,6 @@ int main (){
         switch (letra){
             case '1':
                 inserir(&T);
-                balanceamento(&T);
                 break;
             case '2':
                 deletar(&T);

@@ -7,6 +7,7 @@ tpNo* initArvore(){
 }
 
 int insertArvoreR(tpNo **arvore, int num){
+    int aux;
     if ((*arvore) == NULL){
         tpNo *no = (tpNo*) malloc (sizeof(tpNo));
         if (no != NULL){
@@ -14,39 +15,61 @@ int insertArvoreR(tpNo **arvore, int num){
             no->prtDir = NULL;
             no->prtEsq = NULL;
             (*arvore) = no;
+            fatorBalanceamento(arvore);
             return 0;
         }
         return 1;
     }
     else if ((*arvore)->num <= num){
-        return insertArvoreR(&((*arvore)->prtDir), num);
-    }
-    else{
-        return insertArvoreR(&((*arvore)->prtEsq), num);
-    }
-}
-
-void balanceamento (tpNo **arvore){
-    if ((*arvore) != NULL){
+        aux = insertArvoreR(&((*arvore)->prtDir), num);
         fatorBalanceamento(arvore);
-        balanceamento (&(*arvore)->prtEsq);
-        if ((*arvore)->fatorBalanceamento < -1){
-            printf("Rotacionou 1 vez pra direita.\n");
-            rotacaoSimplesDireita(arvore);
-            fatorBalanceamento(arvore);
-        }
-        else if ((*arvore)->fatorBalanceamento > 1){
-            printf("Rotacionou 1 vez pra esquerda.\n");
+        if ((*arvore)->fatorBalanceamento > 1 && (*arvore)->prtDir->fatorBalanceamento > 0){
             rotacaoSimplesEsquerda(arvore);
             fatorBalanceamento(arvore);
         }
-        else if ()
-        balanceamento(&(*arvore)->prtDir);
+        else if ((*arvore)->fatorBalanceamento > 1 && (*arvore)->prtDir->fatorBalanceamento < 0){
+            rotacaoSimplesDireita(&(*arvore)->prtDir);
+            rotacaoSimplesEsquerda(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ((*arvore)->fatorBalanceamento < -1 && (*arvore)->prtEsq->fatorBalanceamento > 0){
+            rotacaoSimplesEsquerda(&(*arvore)->prtEsq);
+            rotacaoSimplesDireita(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ((*arvore)->fatorBalanceamento < -1 && (*arvore)->prtEsq->fatorBalanceamento < 0){
+            rotacaoSimplesDireita(arvore);
+            fatorBalanceamento(arvore);
+        }
+        return aux;
+    }
+    else{
+        aux = insertArvoreR(&((*arvore)->prtEsq), num);
+        fatorBalanceamento(arvore);
+        if ((*arvore)->fatorBalanceamento > 1 && (*arvore)->prtDir->fatorBalanceamento > 0){
+            rotacaoSimplesEsquerda(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ((*arvore)->fatorBalanceamento > 1 && (*arvore)->prtDir->fatorBalanceamento < 0){
+            rotacaoSimplesDireita(&(*arvore)->prtDir);
+            rotacaoSimplesEsquerda(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ((*arvore)->fatorBalanceamento < -1 && (*arvore)->prtEsq->fatorBalanceamento > 0){
+            rotacaoSimplesEsquerda(&(*arvore)->prtEsq);
+            rotacaoSimplesDireita(arvore);
+            fatorBalanceamento(arvore);
+        }
+        else if ((*arvore)->fatorBalanceamento < -1 && (*arvore)->prtEsq->fatorBalanceamento < 0){
+            rotacaoSimplesDireita(arvore);
+            fatorBalanceamento(arvore);
+        }
+        return aux;
     }
 }
 
 void fatorBalanceamento (tpNo **arvore){
-    if ((*arvore) != NULL){        
+    if ((*arvore) != NULL){
         fatorBalanceamento(&(*arvore)->prtEsq);
         (*arvore)->fatorBalanceamento = alturaArvore((*arvore)->prtDir) - alturaArvore((*arvore)->prtEsq);
         fatorBalanceamento(&(*arvore)->prtDir);

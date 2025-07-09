@@ -48,10 +48,16 @@ int removerPrioridade (int *vet, int ultimoIndice){
     return prioridade;
 }
 
-void inserirItem (int *vet, int item){
-
-    
-
+void inserirItem (int *vet, int ultimoIndice, int item){
+    int *temp = (int*) realloc (vet, (ultimoIndice + 2) * sizeof(int));
+    if (temp == NULL){
+        printf("Erro na realocacao de memoria.\n");
+        return;
+    }    
+    vet = temp;
+    ultimoIndice++;
+    vet[ultimoIndice] = item;
+    sobeHeap(vet, ultimoIndice);
 }
 
 void sobeHeap (int *vet, int indiceAserHipado){
