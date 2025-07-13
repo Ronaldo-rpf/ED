@@ -58,6 +58,9 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "arrayfunctions.h": "c",
+    "heapfunctions.h": "c",
+    "item.h": "c"
   }
 }
