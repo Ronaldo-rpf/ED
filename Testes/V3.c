@@ -25,11 +25,10 @@ int main (){
     controleDias += dias;
     maior.dias--;
 
-    cont++;
 
     while (controleDias > cont){
-
-        if(maior.dias == 0){
+        cont++;
+        if(maior.dias == 0 && cont != 1){
             maior = vet[0];
             vet[0] = vet[indice-1];
             vet[indice-1].media = 0;
@@ -62,7 +61,6 @@ int main (){
         }
         
         maior.dias--;
-        cont++;
     }
     printf("%lf\n", multaTotal);
 

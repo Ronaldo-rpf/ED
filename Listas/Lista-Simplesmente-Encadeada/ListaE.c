@@ -1,36 +1,27 @@
-/********************************************************************
- * Este arquivo contém código para manipular uma lista encadeada de itens.
- * Um item é uma estrutura definida pelo usuário da biblioteca ListaE.h.
- * Uma lista encadeada é um ponteiro para um nó. Um nó possui dois campos:
- * a) um campo do tipo tpItem;
- * b) um ponteiro para o próximo nó;
- *
- * Obs:
- * -> O tipo tpItem deve conter obrigatóriamente um campo nomeado de id do tipo unsigned int.
- *
- */
 #include "ListaE.h"
-//-----------------------------------------------------------------------------
+
 struct Celula {
        tpItem    item;
        struct Celula  *prox;
 };
 
 typedef  struct Celula tpNo;
-//-----------------------------------------------------------------------------
+
 /**
- * @param .
- * @return a lista inicializada com o ponteiro apontando para NULL;
+ * Inicia uma lista simplesmente encadeada vazia.
+ * @return A lista inicializada com o ponteiro apontando para NULL.
  */
-tpNo* initLstE(){
+tpNo * initLstE(){
     tpNo *lst = NULL;
     return lst;
 }
 
+
 /**
- * @param lst = uma Lista de itens;
- * @param item= um item a ser inserido em lst
- * @return a lista se o item foi inserido em lst ou NULL caso contrário.
+ * Insere um item em uma lista simplesmente encadeada.
+ * @param lst Uma lista de itens;
+ * @param item Um item a ser inserido na lista.
+ * @return A lista se o item foi inserido com sucesso, ou NULL caso contrário.
  */
 tpNo *insertLstE(tpNo *lst, tpItem item){
     tpNo *no = (tpNo*)malloc(sizeof(tpNo));
@@ -42,25 +33,24 @@ tpNo *insertLstE(tpNo *lst, tpItem item){
 	}
     return NULL;
 }
-//-----------------------------------------------------------------------------
+
+
 /**
- * @param lst = uma Lista não vazia de itens;
- * @return retorna o item da primeira posição de lst.
+ * Retorna o primeiro item de uma lista simplesmente encadeada.
+ * @param lst  Uma Lista não vazia de itens.
+ * @return O item da primeira posição da lista simplesmente encadeada.
  */
-tpItem getE(tpNo *lst){
+tpItem  getE(tpNo *lst){
        return lst->item;
 }
 
 
-//-----------------------------------------------------------------------------
 /**
- * Exibe no monitor os itens da lista.
- * @param lst = uma Lista de itens;
+ * Exibe no monitor os itens de uma lista simplesmente encadeada.
+ * @param lst Uma lista simplesmente encadeada de itens.
  * @return
  */
 void printLstE(tpNo *lst){
-    //tpNo *aux = lst;
-
     while (lst != NULL) {
             printItem(lst->item);
             printf("\n----------------------------------");
@@ -68,25 +58,25 @@ void printLstE(tpNo *lst){
     }
 }
 
-//-----------------------------------------------------------------------------
+
 /**
  * Verifica se a lista está vazia.
- * @param lst = uma Lista de itens;
- * @return true se lst vazia ou false caso contrário.
+ * @param lst Uma lista simplesmente encadeada de itens.
+ * @return True se a lista simplesmente encadeada estiver vazia ou false caso contrário.
  */
 booleano isEmptyLstE(tpNo *lst){
     if (lst == NULL) return true;
     return false;
 }
 
-//-----------------------------------------------------------------------------
+
 /**
- * Verifica se a lista está vazia.
- * @param lst uma Lista de itens;
- * @param id é o identificador que será buscado em lst.
- * @return o item na lista com o id ou NULL se não for encontrado.
+ * Procura um identificador em uma lista simplesmente encadeada.
+ * @param lst Uma lista simplesmente encadeada de itens;
+ * @param id O identificador que será buscado na lista simplesmente encadeada.
+ * @return O item na lista com o identificador, ou NULL se não for encontrado.
  */
-tpItem* searchItemLstE(tpNo *lst, unsigned int id){
+tpItem * searchItemLstE(tpNo *lst, unsigned int id){
     if  (lst != NULL){
         if (lst->item.id == id){
             return &(lst->item);
@@ -97,6 +87,13 @@ tpItem* searchItemLstE(tpNo *lst, unsigned int id){
     return NULL;
 }
 
+
+/**
+ * Remove um item de uma lista simplesmente encadeada.
+ * @param lst Uma lista simplesmente encadeada de itens;
+ * @param id O identificador que será removido na lista simplesmente encadeada.
+ * @return O novo ponteiro para o início da lista simplesmente encadeada.
+ */
 tpNo* removerItem (tpNo* lst, unsigned int id){
     tpNo* anterior = NULL;
     tpNo* atual = lst;
@@ -122,3 +119,124 @@ tpNo* removerItem (tpNo* lst, unsigned int id){
     return lst;
 }
 
+
+/**
+ * Retorna quantos itens estão inseridos em uma lista simplesmente encadeada.
+ * @param lst Uma lista simplesmente encadeada de itens;
+ * @return A quantidade de itens cadastrados em uma lista simplesmente encadeada.
+ */
+int consultarQTDEAlunos(tpNo* lst){
+    if(lst==NULL)
+        return 0;
+    
+    return 1 + consultarQTDEAlunos(lst->prox);
+}
+
+
+/**
+ * Preenche um vetor auxiliar de itens.
+ * @param noAtual O primeiro nó de uma lista simplesmente encadeada, ou seja, a própria lista;
+ * @param vetorDeItens O vetor auxiliar que será preenchido;
+ * @param indice O último índice válido do vetor auxiliar.
+ * @return
+ */
+void preencherArrayAuxiliar(tpNo* noAtual, tpItem* vetorDeItens, int indice){
+    if(indice < 0)
+        return;
+
+    vetorDeItens[indice] = noAtual->item;
+    indice--;
+    preencherArrayAuxiliar(noAtual->prox, vetorDeItens, indice);
+}
+
+
+/**
+ * Ordena um vetor de itens.
+ * @param vet Um vetor de itens;
+ * @param i O primeiro índice do vetor;
+ * @param f O último índice do vetor.
+ * @return 
+ */
+void mergeSortItem(tpItem* vet, int i, int f){
+    if(i>=f)
+        return;
+
+    int meio = (f + i) / 2;    
+    mergeSortItem(vet, i, meio);
+    mergeSortItem(vet, meio + 1, f);
+    intercalaItem(vet, i, meio, f);
+}
+
+
+/**
+ * Intercala crescentemente os valores dos índices de um vetor em um intervalo.
+ * @param vet Vetor de itens;
+ * @param init índice do início do intervalo;
+ * @param meio Índice do meio do intervalo;
+ * @param fim Índice do final do intervalo.
+ * @return 
+ */
+void intercalaItem(tpItem* vet, int init, int meio, int fim){
+    tpItem* vetAux = (tpItem*)malloc(sizeof(tpItem) * (unsigned long long)(fim - init + 1));
+    int aux = 0;
+
+    int v1 = init;
+    int v2 = meio+1;
+    
+    while(v1 <= meio && v2 <= fim){
+        if(vet[v1].id <= vet[v2].id){
+            vetAux[aux] = vet[v1];
+            aux++;
+            v1++;
+        }
+        else{
+            vetAux[aux] = vet[v2];
+            aux++;
+            v2++;
+        }
+    }
+
+    while(v1 <= meio){
+        vetAux[aux] = vet[v1];
+        v1++;
+        aux++;
+    }
+
+    while(v2 <= fim){
+        vetAux[aux] = vet[v2];
+        v2++;
+        aux++;
+    }
+
+    aux = 0;
+    for(int x = init; x <= fim; x++){
+        vet[x] = vetAux[aux];
+        aux++;
+    }
+}
+
+
+/**
+ * Ordena uma lista simplesmente encadeada.
+ * @param lst Uma lista simplesmente encadeada.
+ * @return 
+ */
+void ordenarLista(tpNo** lst){
+    int qtde = consultarQTDEAlunos(*lst);
+
+    if(qtde == 0)
+        return;
+
+    tpItem* vetorItens = (tpItem*)malloc(sizeof(tpItem) * (unsigned long long)(qtde));
+    preencherArrayAuxiliar(*lst, vetorItens, qtde-1);
+
+    mergeSortItem(vetorItens, 0, qtde-1);
+
+    tpNo** listaAux = NULL;
+    listaAux = lst;
+
+    for(int i = 0; i < qtde; i++){
+        (*listaAux)->item = vetorItens[i];
+        listaAux = &(*listaAux)->prox;
+    }
+}

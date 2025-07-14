@@ -31,11 +31,28 @@ int main (){
 
     printf("Fim do dia %d.\n", (cont + 1));
     cont++;
-
-    while (controleDias > cont){
+    do{
         printf("Inicio dia %d.\n", (cont + 1));
 
-        if(maior.dias == 0){
+        if (maior.dias == 0 && cont == 1){
+            scanf("%d %d", &dias, &multa);
+            if (dias != 0){
+                vet[tamanho-1].dias = dias;
+                controleDias += dias;
+                vet[tamanho-1].multa = multa;
+                vet[tamanho-1].media = vet[tamanho-1].multa / vet[tamanho-1].dias;
+                maior = vet[tamanho-1];
+                printf("Comecou a treinar um dragao. %d %lf\n", maior.dias, maior.multa);
+            }
+            else{
+                flag = 0;
+            }
+            maior.dias--;
+            printf("Fim do dia %d.\n", (cont + 1));
+            cont++;
+            continue;
+        }
+        if(maior.dias == 0 && cont != 1){
             printf("Terminou de treinar um dragao.\n");
             for (int i = 0; i < tamanho; i++){
                 if (vet[i].media == maior.media){
@@ -47,7 +64,8 @@ int main (){
             tamanho--;
             dragao *temp = (dragao*) realloc (vet, tamanho * sizeof(dragao));
             if (temp == NULL){
-                return 0;
+                printf("Erro na alocacao.\n");
+                break;
             }
             vet = temp;
             desceHeap(vet, tamanho-1, indice);
@@ -85,7 +103,7 @@ int main (){
         maior.dias--;
         printf("Fim do dia %d.\n", (cont + 1));
         cont++;
-    }
+    }while (controleDias > cont);
     
     printf("Multa a pagar TOTAL = %.2lf\n", multaTotal);
     free(vet);
